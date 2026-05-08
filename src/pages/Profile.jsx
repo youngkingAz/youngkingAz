@@ -126,6 +126,13 @@ const infoCardStyle = {
 };
 
 /** @type {React.CSSProperties} */
+const infoLinkStyle = {
+  color: '#fdba74',
+  fontWeight: 700,
+  textDecoration: 'none',
+};
+
+/** @type {React.CSSProperties} */
 const labelStyle = {
   display: 'block',
   marginBottom: '0.45rem',
@@ -1058,6 +1065,33 @@ export default function Profile() {
               >
                 {isResettingAllProgress ? 'Resetting all progress...' : 'Reset All Progress'}
               </Button>
+            </Card>
+
+            <div style={{ height: '1rem' }} />
+
+            <Card style={infoCardStyle}>
+              <p
+                style={{
+                  margin: '0 0 0.35rem',
+                  color: '#fdba74',
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Website
+              </p>
+              <p style={{ margin: '0 0 0.65rem', color: '#d4d4d4', lineHeight: 1.6 }}>
+                Your launch website name is set up as YoungKingAzWorkout.
+              </p>
+              <a
+                href="https://youngkingazworkout.com"
+                target="_blank"
+                rel="noreferrer"
+                style={infoLinkStyle}
+              >
+                youngkingazworkout.com
+              </a>
             </Card>
 
             <div style={{ height: '1rem' }} />

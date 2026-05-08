@@ -1,4 +1,4 @@
-package com.example.app;
+package com.youngkingaz.workout;
 
 import android.os.Bundle;
 

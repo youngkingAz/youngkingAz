@@ -1,6 +1,18 @@
 {
   "expo": {
+    "name": "YoungKingAz Workout",
+    "slug": "youngkingaz-workout",
+    "scheme": "youngkingazworkout",
+    "version": "1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.youngkingaz.workout",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.youngkingaz.workout"
+    },
     "extra": {
+      "publicSiteUrl": "https://youngkingazworkout.com",
       "eas": {
         "projectId": "20b1ca8f-2181-40ce-bcfc-a832a5c9d881"
       }
