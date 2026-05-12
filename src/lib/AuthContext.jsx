@@ -4,6 +4,35 @@ import { appParams } from './app-params';
 import { isSupabaseConfigured, supabase } from './supabaseClient';
 
 /**
+ * @param {string | null | undefined} baseUrl
+ * @returns {string | null}
+ */
+function normalizeBaseUrl(baseUrl) {
+  if (!baseUrl) {
+    return null;
+  }
+
+  return String(baseUrl).trim().replace(/\/+$/, '');
+}
+
+/**
+ * @returns {string}
+ */
+function getEmailRedirectUrl() {
+  const configuredBaseUrl = normalizeBaseUrl(appParams.appBaseUrl);
+
+  if (configuredBaseUrl) {
+    return `${configuredBaseUrl}/profile`;
+  }
+
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return `${window.location.origin}/profile`;
+  }
+
+  return 'http://localhost:5173/profile';
+}
+
+/**
  * @typedef {Object} AuthUserLike
  * @property {string} id
  * @property {string | null | undefined} [email]
@@ -399,6 +428,7 @@ export const AuthProvider = ({ children }) => {
       email,
       password,
       options: {
+        emailRedirectTo: getEmailRedirectUrl(),
         data: {
           full_name: fullName || '',
         },
