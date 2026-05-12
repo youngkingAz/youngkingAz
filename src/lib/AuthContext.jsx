@@ -33,6 +33,21 @@ function getEmailRedirectUrl() {
 }
 
 /**
+ * @param {string | null | undefined} message
+ * @returns {string}
+ */
+function mapAuthErrorMessage(message) {
+  const nextMessage = String(message || '').trim();
+  const lowerMessage = nextMessage.toLowerCase();
+
+  if (lowerMessage.includes('email rate limit exceeded')) {
+    return 'Too many signup emails were sent recently. Please wait a bit and try again. For live customer volume, connect a custom SMTP provider in Supabase Auth.';
+  }
+
+  return nextMessage || 'Something went wrong with authentication.';
+}
+
+/**
  * @typedef {Object} AuthUserLike
  * @property {string} id
  * @property {string | null | undefined} [email]
@@ -291,7 +306,7 @@ export const AuthProvider = ({ children }) => {
     if (error) {
       setAuthError({
         type: 'auth_error',
-        message: error.message,
+        message: mapAuthErrorMessage(error.message),
       });
       setUser(null);
       setIsAuthenticated(false);
@@ -320,7 +335,7 @@ export const AuthProvider = ({ children }) => {
     if (error) {
       setAuthError({
         type: 'auth_error',
-        message: error.message,
+        message: mapAuthErrorMessage(error.message),
       });
       return { isAuthenticated: false, user: null };
     }
@@ -372,7 +387,7 @@ export const AuthProvider = ({ children }) => {
         .catch((error) => {
           setAuthError({
             type: 'auth_error',
-            message: error.message || 'Authentication state update failed.',
+            message: mapAuthErrorMessage(error.message) || 'Authentication state update failed.',
           });
           setIsLoadingAuth(false);
         });
@@ -403,7 +418,7 @@ export const AuthProvider = ({ children }) => {
     if (result.error) {
       setAuthError({
         type: 'auth_error',
-        message: result.error.message,
+        message: mapAuthErrorMessage(result.error.message),
       });
     }
 
@@ -438,7 +453,7 @@ export const AuthProvider = ({ children }) => {
     if (result.error) {
       setAuthError({
         type: 'auth_error',
-        message: result.error.message,
+        message: mapAuthErrorMessage(result.error.message),
       });
     }
 
@@ -454,7 +469,7 @@ export const AuthProvider = ({ children }) => {
       if (error) {
         setAuthError({
           type: 'auth_error',
-          message: error.message,
+          message: mapAuthErrorMessage(error.message),
         });
       }
     }

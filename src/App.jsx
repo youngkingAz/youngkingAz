@@ -12,6 +12,8 @@ import WorkoutPlayer from './pages/WorkoutPlayer';
 import Profile from './pages/Profile';
 import BillingSuccess from './pages/BillingSuccess';
 import BillingCanceled from './pages/BillingCanceled';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Support from './pages/Support';
 import PageNotFound from './lib/PageNotFound';
 
 /** @typedef {{ children?: React.ReactNode }} ErrorBoundaryProps */
@@ -125,6 +127,8 @@ function AuthenticatedApp() {
         <Route path="/profile"            element={<Profile />} />
         <Route path="/billing/success"    element={<BillingSuccess />} />
         <Route path="/billing/canceled"   element={<BillingCanceled />} />
+        <Route path="/privacy"            element={<PrivacyPolicy />} />
+        <Route path="/support"            element={<Support />} />
       </Route>
       <Route path="/404" element={<PageNotFound />} />
       <Route path="*"    element={<Navigate to="/404" replace />} />
